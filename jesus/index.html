@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunday Notes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    .date-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .date-list li {
+        margin: 10px 0;
+    }
+
+    .date-list a {
+        color: #fff;
+        background-color: #007BFF;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: inline-block;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .date-list a:hover {
+        background-color: #0056b3;
+        transform: scale(1.1);
+    }
+
+    /* Modal styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+        animation: fadeIn 0.5s;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+        text-align: left;
+        animation: slideIn 0.5s;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+
+    @keyframes slideIn {
+        from {transform: translateY(-100px);}
+        to {transform: translateY(0);}
+    }
+
+    audio {
+        display: block;
+        margin-top: 10px;
+    }
+
+    .section {
+        margin-bottom: 20px;
+    }
+
+    .section h3 {
+        margin-top: 0;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>Sunday Notes</h1>
+        <ul class="date-list">
+            <li><a href="#" class="date-link" data-date="23-06-2024">23-06-2024</a></li>
+            <li><a href="#" class="date-link" data-date="30-06-2021">30-06-2021</a></li>
+            <li><a href="#" class="date-link" data-date="02-07-2024">02-07-2024</a></li>
+            <!-- Add more dates here -->
+        </ul>
+    </div>
+
+  
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+    
+        const notes = {
+            "23-06-2024": [
+                {
+                    heading: "ద్వితీయోపదేశకాండమ 28:1",
+                    points: [
+                        { text: "నీవు నీ దేవుడైన యెహోవా మాట శ్రద్ధగా వినినేడు నేను నీకు ఆజ్ఞాపించుచున్న ఆయన ఆజ్ఞలనన్నిటిని అనుసరించి నడుచుకొనినయెడల నీ దేవు డైన యెహోవా భూమిమీదనున్న సమస్త జనములకంటె నిన్ను హెచ్చించును.", audio: "d1.m4a" }
+                    ]
+                },
+                {
+                    heading: "కీర్తనల గ్రంథము 119 : 72",
+                    points: [
+                        { text: "వేలకొలది వెండి బంగారు నాణములకంటె నీ విచ్చిన ధర్మశాస్త్రము నాకు మేలు..", audio: "d2.m4a" }
+                    ]
+                },
+                {
+                    heading: "other topics",
+                    points: [
+                        { text: "దానియేలు 6 : 10", audio: "" },
+                        { text: "మత్తయి సువార్త : 5:44 ,6:6 6:31", audio: "" },
+                        { text: "మార్కు సువార్త 1:35", audio: "" },
+                        { text: "అపొస్తలుల కార్యములు 10:9 ,10:10", audio: "" }
+                    ]
+                }
+            ],
+            "30-06-2021": [
+                {
+                    heading: "coming soon",
+                    points: []
+                }
+            ],
+            "02-07-2024": [
+                {
+                    heading: "coming soon",
+                    points: []
+                }
+            ]
+        };
+
+       
+        var modal = document.getElementById("myModal");
+
+        var span = document.getElementsByClassName("close")[0];
+
+     
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+     
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+
+        var dateLinks = document.getElementsByClassName("date-link");
+        for (var i = 0; i < dateLinks.length; i++) {
+            dateLinks[i].onclick = function(event) {
+                event.preventDefault();
+                var date = this.getAttribute("data-date");
+                var noteSections = notes[date] || [{ heading: "No notes available", points: [{ text: "No notes available for this date.", audio: "" }] }];
+
+                var modalBody = document.getElementById("modal-body");
+                modalBody.innerHTML = "";
+
+          
+                noteSections.forEach(function(section) {
+                    var sectionDiv = document.createElement("div");
+                    sectionDiv.className = "section";
+
+                    var sectionHeading = document.createElement("h3");
+                    sectionHeading.textContent = section.heading;
+                    sectionDiv.appendChild(sectionHeading);
+
+                    var ul = document.createElement("ul");
+
+                    section.points.forEach(function(point) {
+                        var li = document.createElement("li");
+                        li.textContent = point.text;
+
+                        if (point.audio) {
+                            var audio = document.createElement("audio");
+                            audio.controls = true;
+                            var source = document.createElement("source");
+                            source.src = point.audio;
+                            source.type = "audio/mpeg";
+                            audio.appendChild(source);
+                            li.appendChild(audio);
+                        }
+
+                        ul.appendChild(li);
+                    });
+
+                    sectionDiv.appendChild(ul);
+                    modalBody.appendChild(sectionDiv);
+                });
+
+                modal.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
